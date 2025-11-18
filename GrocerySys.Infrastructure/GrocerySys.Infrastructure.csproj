@@ -1,0 +1,14 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\GrocerySys.Application\GrocerySys.Application.csproj" />
+    <ProjectReference Include="..\GrocerySys.Domain\GrocerySys.Domain.csproj" />
+  </ItemGroup>
+
+</Project>

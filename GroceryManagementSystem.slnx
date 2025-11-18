@@ -1,0 +1,9 @@
+<Solution>
+  <Folder Name="/Presentation/">
+    <Project Path="GrocerySys.API/GrocerySys.API.csproj" />
+    <Project Path="GrocerySys.WebUi/GrocerySys.WebUi.csproj" Id="d3c54b09-646c-48da-95ec-8aac9955c9cf" />
+  </Folder>
+  <Project Path="GrocerySys.Application/GrocerySys.Application.csproj" />
+  <Project Path="GrocerySys.Domain/GrocerySys.Domain.csproj" />
+  <Project Path="GrocerySys.Infrastructure/GrocerySys.Infrastructure.csproj" />
+</Solution>
