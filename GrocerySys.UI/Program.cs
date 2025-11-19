@@ -1,4 +1,4 @@
-using GrocerySys.UI.Components;
+using GrocerySys.UI;
 using MudBlazor.Services;
 
 var builder = WebApplication.CreateBuilder(args);

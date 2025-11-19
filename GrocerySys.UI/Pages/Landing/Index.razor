@@ -1,0 +1,23 @@
+﻿@page "/"
+@page "/home"
+
+<PageTitle>Welcome</PageTitle>
+
+<MudContainer MaxWidth="MaxWidth.Medium">
+
+    <MudText Typo="Typo.h4" Class="mt-6 mb-2">Welcome to GrocerySys</MudText>
+    <MudText Typo="Typo.subtitle1">
+        Manage your grocery inventory, sales, suppliers, and reports — all in one system.
+    </MudText>
+
+    <MudPaper Elevation="4" Class="mt-6 pa-6 d-flex justify-space-between">
+        <MudButton Variant="Variant.Filled" Color="Color.Primary" Href="/dashboard">
+            Go to Dashboard
+        </MudButton>
+
+        <MudButton Variant="Variant.Outlined" Href="/products">
+            View Products
+        </MudButton>
+    </MudPaper>
+
+</MudContainer>
