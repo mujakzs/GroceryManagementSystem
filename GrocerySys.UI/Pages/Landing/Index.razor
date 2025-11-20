@@ -1,23 +1,223 @@
 ﻿@page "/"
-@page "/home"
+@page "/Home"
+@inject NavigationManager NavigationManager
 
-<PageTitle>Welcome</PageTitle>
+@* Hero Section - Testiny inspired layout *@
+<section class="pa-0 ma-0 mud-background-gray-lighten-5">
+    <MudContainer MaxWidth="MaxWidth.Large" Class="py-16 py-sm-10">
+        <MudGrid Justify="Justify.Center" AlignItems="AlignItems.Center">
 
-<MudContainer MaxWidth="MaxWidth.Medium">
+            <MudItem xs="12" md="6">
+                <MudStack Spacing="4" Class="py-4 px-sm-4">
+                    <MudText Typo="Typo.h2" Class="mud-text-dark">
+                        The Best <span class="mud-text-primary">Grocery Store</span> Management Solution
+                    </MudText>
 
-    <MudText Typo="Typo.h4" Class="mt-6 mb-2">Welcome to Grocery Store Management</MudText>
-    <MudText Typo="Typo.subtitle1">
-        Manage your grocery inventory, sales, suppliers, and reports — all in one system.
-    </MudText>
+                    <MudText Typo="Typo.h5" Class="mud-text-secondary">
+                        Automate inventory, minimize shrinkage, and track real-time profitability with ease.
+                    </MudText>
 
-    <MudPaper Elevation="4" Class="mt-6 pa-6 d-flex justify-space-between">
-        <MudButton Variant="Variant.Filled" Color="Color.Primary" Href="/dashboard">
-            Go to Dashboard
-        </MudButton>
+                    <MudText Typo="Typo.body1">
+                        Designed for small grocery store owners, our system eliminates manual record-keeping
+                        and gives you the business insights you need to grow—all in one easy-to-use platform.
+                    </MudText>
 
-        <MudButton Variant="Variant.Outlined" Href="/products">
-            View Products
-        </MudButton>
-    </MudPaper>
+                    <MudButton Variant="Variant.Filled"
+                               Color="Color.Primary"
+                               Size="Size.Large"
+                               Class="mt-4 px-8"
+                               Style="width: fit-content; text-transform: none; border-radius: 8px;"
+                               OnClick="@(() => NavigationManager.NavigateTo("/signup"))">
+                        Start Free Trial
+                    </MudButton>
 
-</MudContainer>
+                    <MudText Typo="Typo.caption" Class="mt-2 mud-text-secondary">
+                        <MudIcon Icon="@Icons.Material.Filled.CheckCircle" Size="Size.Small" Color="Color.Success" Class="mr-1" /> No credit card required. Instantly ready.
+                    </MudText>
+                </MudStack>
+            </MudItem>
+
+            <MudItem xs="12" md="6" Class="text-center">
+                @* Image example for dashboard *@
+
+
+
+            </MudItem>
+        </MudGrid>
+    </MudContainer>
+</section>
+
+@* Features Section *@
+<section class="py-16">
+    <MudContainer MaxWidth="MaxWidth.Large">
+        <MudText Typo="Typo.h4" Align="Align.Center" Class="mb-4">
+            Powerful Features Built for Efficiency
+        </MudText>
+        <MudText Typo="Typo.subtitle1" Align="Align.Center" Class="mb-12 mud-text-secondary">
+            Everything your small store needs to replace manual work and boost profits.
+        </MudText>
+
+        <MudGrid Spacing="4">
+
+            <MudItem xs="12" sm="6" md="3">
+                <MudPaper Class="pa-6 d-flex flex-column align-center text-center mud-elevation-2 rounded-lg" Style="height: 100%;">
+                    <MudIcon Icon="@Icons.Material.Filled.PointOfSale" Size="Size.Large" Color="Color.Primary" Class="mb-3" />
+                    <MudText Typo="Typo.h6" Class="mb-2">Point of Sale (POS)</MudText>
+                    <MudText Typo="Typo.body2" Class="mud-text-secondary">
+                        Lightning-fast checkout, automatic stock deduction, and integrated payment options.
+                    </MudText>
+                </MudPaper>
+            </MudItem>
+
+            <MudItem xs="12" sm="6" md="3">
+                <MudPaper Class="pa-6 d-flex flex-column align-center text-center mud-elevation-2 rounded-lg" Style="height: 100%;">
+                    <MudIcon Icon="@Icons.Material.Filled.BarChart" Size="Size.Large" Color="Color.Primary" Class="mb-3" />
+                    <MudText Typo="Typo.h6" Class="mb-2">Real-time Reporting</MudText>
+                    <MudText Typo="Typo.body2" Class="mud-text-secondary">
+                        Instant access to daily sales, inventory valuation, and precise profit margins.
+                    </MudText>
+                </MudPaper>
+            </MudItem>
+
+            <MudItem xs="12" sm="6" md="3">
+                <MudPaper Class="pa-6 d-flex flex-column align-center text-center mud-elevation-2 rounded-lg" Style="height: 100%;">
+                    <MudIcon Icon="@Icons.Material.Filled.CreditCard" Size="Size.Large" Color="Color.Primary" Class="mb-3" />
+                    <MudText Typo="Typo.h6" Class="mb-2">Utang System Tracking</MudText>
+                    <MudText Typo="Typo.body2" Class="mud-text-secondary">
+                        Securely log customer credit/debt, track outstanding balances, and generate payment reminders.
+                    </MudText>
+                </MudPaper>
+            </MudItem>
+
+            <MudItem xs="12" sm="6" md="3">
+                <MudPaper Class="pa-6 d-flex flex-column align-center text-center mud-elevation-2 rounded-lg" Style="height: 100%;">
+                    <MudIcon Icon="@Icons.Material.Filled.Warning" Size="Size.Large" Color="Color.Primary" Class="mb-3" />
+                    <MudText Typo="Typo.h6" Class="mb-2">Expiry & Loss Alerts</MudText>
+                    <MudText Typo="Typo.body2" Class="mud-text-secondary">
+                        Get timely warnings for near-expiry stock and track shrinkage from damage or theft.
+                    </MudText>
+                </MudPaper>
+            </MudItem>
+        </MudGrid>
+    </MudContainer>
+</section>
+
+@* Why Section *@
+<section class="py-16 mud-background-gray-lighten-5">
+    <MudContainer MaxWidth="MaxWidth.Medium">
+        <MudText Typo="Typo.h4" Align="Align.Center" Class="mb-4">
+            Why Choose Grocery Store Management?
+        </MudText>
+        <MudText Typo="Typo.subtitle1" Align="Align.Center" Class="mb-12 mud-text-secondary">
+            We bridge the gap between struggling manual operations and efficient, data-driven business management.
+        </MudText>
+
+        <MudGrid Spacing="4">
+
+            <MudItem xs="12" sm="6">
+                <MudPaper Class="pa-6 rounded-lg d-flex flex-column" Outlined="true" Elevation="0" Style="height: 100%;">
+                    <MudText Typo="Typo.h6" Class="mb-3 mud-text-error">
+                        <MudIcon Icon="@Icons.Material.Filled.HighlightOff" Size="Size.Small" Class="mr-2" /> Current Struggles (Manual)
+                    </MudText>
+                    <ul class="pl-4">
+                        <li><b>Lost Profits:</b> Hidden losses from uncollected *utang* and missing stock.</li>
+                        <li><b>Wasted Time:</b> Hours spent creating manual sales and inventory lists.</li>
+                        <li><b>Blind Spots:</b> Guessing product demand and overall store profitability.</li>
+                    </ul>
+                </MudPaper>
+            </MudItem>
+
+            <MudItem xs="12" sm="6">
+                <MudPaper Class="pa-6 rounded-lg d-flex flex-column" Outlined="true" Elevation="0" Style="height: 100%;">
+                    <MudText Typo="Typo.h6" Class="mb-3 mud-text-success">
+                        <MudIcon Icon="@Icons.Material.Filled.CheckCircleOutline" Size="Size.Small" Class="mr-2" /> GrocerySys Solution (Automated)
+                    </MudText>
+                    <ul class="pl-4">
+                        <li><b>Instant Profitability:</b> Real-time analytics on sales, costs, and profit per item.</li>
+                        <li><b>Automated Efficiency:</b> Digital POS, supplier tracking, and low-stock alerts.</li>
+                        <li><b>Clear Insights:</b> Inventory value, fast-moving items, and comprehensive reports.</li>
+                    </ul>
+                </MudPaper>
+            </MudItem>
+        </MudGrid>
+    </MudContainer>
+</section>
+
+@* How it Works Section *@
+<section class="py-16">
+    <MudContainer MaxWidth="MaxWidth.Medium">
+        <MudText Typo="Typo.h4" Align="Align.Center" Class="mb-4">
+            How the Automated System Works
+        </MudText>
+        <MudText Typo="Typo.subtitle1" Align="Align.Center" Class="mb-12 mud-text-secondary">
+            A simple, intuitive workflow from procurement to sales.
+        </MudText>
+
+        <MudGrid Justify="Justify.Center" Spacing="4">
+            <MudItem xs="12" sm="6" md="3">
+                <MudPaper Class="pa-4 text-center mud-text-primary mud-elevation-2 rounded-lg" Style="height: 100%;">
+                    <MudIcon Icon="@Icons.Material.Filled.ShoppingCart" Size="Size.Large" Color="Color.Primary" Class="mb-2" />
+                    <MudText Typo="Typo.h6" Class="mb-1">1. Purchase Order</MudText>
+                    <MudText Typo="Typo.body2">Generate orders based on smart low-stock suggestions.</MudText>
+                </MudPaper>
+            </MudItem>
+            <MudItem xs="12" sm="6" md="3">
+                <MudPaper Class="pa-4 text-center mud-text-primary mud-elevation-2 rounded-lg" Style="height: 100%;">
+                    <MudIcon Icon="@Icons.Material.Filled.LocalShipping" Size="Size.Large" Color="Color.Primary" Class="mb-2" />
+                    <MudText Typo="Typo.h6" Class="mb-1">2. Receiving & Costing</MudText>
+                    <MudText Typo="Typo.body2">Log goods in, accurately tracking cost and expiry dates.</MudText>
+                </MudPaper>
+            </MudItem>
+            <MudItem xs="12" sm="6" md="3">
+                <MudPaper Class="pa-4 text-center mud-text-primary mud-elevation-2 rounded-lg" Style="height: 100%;">
+                    <MudIcon Icon="@Icons.Material.Filled.Storefront" Size="Size.Large" Color="Color.Primary" Class="mb-2" />
+                    <MudText Typo="Typo.h6" Class="mb-1">3. Sales & Utang</MudText>
+                    <MudText Typo="Typo.body2">Fast POS for cash sales or secure customer credit logging.</MudText>
+                </MudPaper>
+            </MudItem>
+            <MudItem xs="12" sm="6" md="3">
+                <MudPaper Class="pa-4 text-center mud-text-primary mud-elevation-2 rounded-lg" Style="height: 100%;">
+                    <MudIcon Icon="@Icons.Material.Filled.Assessment" Size="Size.Large" Color="Color.Primary" Class="mb-2" />
+                    <MudText Typo="Typo.h6" Class="mb-1">4. Daily Insights</MudText>
+                    <MudText Typo="Typo.body2">View instant profit, cash flow, and stock adjustments daily.</MudText>
+                </MudPaper>
+            </MudItem>
+        </MudGrid>
+    </MudContainer>
+</section>
+
+@* Call to Action Footer *@
+<footer class="mud-background-primary pt-10 pb-12 mt-12">
+    <MudContainer MaxWidth="MaxWidth.Medium">
+        <MudGrid AlignItems="AlignItems.Center">
+
+            <MudItem xs="12" md="6">
+                <MudStack Spacing="1">
+                    <MudText Typo="Typo.h5" Class="mud-text-white">Ready to Transform Your Store?</MudText>
+                    <MudText Typo="Typo.body1" Class="mud-text-white mud-text-lighten-2">
+                        Start your free trial today and experience the future of grocery management.
+                    </MudText>
+                </MudStack>
+            </MudItem>
+
+            <MudItem xs="12" md="6">
+                <MudStack Row="true" Spacing="2" Class="mt-4 mt-md-0">
+                    <MudTextField T="string" Placeholder="Enter your email" Variant="Variant.Filled"
+                                  Class="flex-grow-1"
+                                  InputClass="mud-text-white"
+                                  AdornmentIcon="@Icons.Material.Filled.Email"
+                                  AdornmentColor="Color.Default"
+                                  Color="Color.Tertiary"
+                                  Dense="true"
+                                  Style="border-radius: 8px;" />
+                    <MudButton Variant="Variant.Filled" Color="Color.Tertiary" Size="Size.Large"
+                               Style="text-transform: none; border-radius: 8px;"
+                               OnClick="@(() => NavigationManager.NavigateTo("/signup"))">
+                        Sign Up Now
+                    </MudButton>
+                </MudStack>
+            </MudItem>
+        </MudGrid>
+    </MudContainer>
+</footer>
+
