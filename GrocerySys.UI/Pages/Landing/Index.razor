@@ -2,7 +2,7 @@
 @page "/Home"
 @inject NavigationManager NavigationManager
 
-@* Hero Section - Testiny inspired layout *@
+@* Hero Section  *@
 <section class="pa-0 ma-0 mud-background-gray-lighten-5">
     <MudContainer MaxWidth="MaxWidth.Large" Class="py-16 py-sm-10">
         <MudGrid Justify="Justify.Center" AlignItems="AlignItems.Center">
@@ -10,7 +10,7 @@
             <MudItem xs="12" md="6">
                 <MudStack Spacing="4" Class="py-4 px-sm-4">
                     <MudText Typo="Typo.h2" Class="mud-text-dark">
-                        The Best <span class="mud-text-primary">Grocery Store</span> Management Solution
+                        <b>The Best Grocery Store Management Solution</b>
                     </MudText>
 
                     <MudText Typo="Typo.h5" Class="mud-text-secondary">
@@ -19,7 +19,7 @@
 
                     <MudText Typo="Typo.body1">
                         Designed for small grocery store owners, our system eliminates manual record-keeping
-                        and gives you the business insights you need to grow—all in one easy-to-use platform.
+                        and gives you the business insights you need to grow all in one easy-to-use platform.
                     </MudText>
 
                     <MudButton Variant="Variant.Filled"
@@ -38,10 +38,7 @@
             </MudItem>
 
             <MudItem xs="12" md="6" Class="text-center">
-                @* Image example for dashboard *@
-
-
-
+                <MudImage Src="@HeroImage" Alt="Hero" Class="hero-img" />
             </MudItem>
         </MudGrid>
     </MudContainer>
@@ -221,3 +218,14 @@
     </MudContainer>
 </footer>
 
+
+
+@code {
+    // path relative to wwwroot
+    private const string DefaultHeroImage = "images/default.jpg";
+
+    // If you later allow customizing the image, set CustomHeroImage; otherwise null uses default.
+    private string? CustomHeroImage = null;
+
+    private string HeroImage => string.IsNullOrWhiteSpace(CustomHeroImage) ? DefaultHeroImage : CustomHeroImage;
+}
