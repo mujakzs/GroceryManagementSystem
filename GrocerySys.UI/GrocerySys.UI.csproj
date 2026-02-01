@@ -6,14 +6,16 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
-
   <ItemGroup>
-    <PackageReference Include="MudBlazor" Version="8.*" />
-    <PackageReference Include="MudBlazor.ThemeManager" Version="3.0.0" />
+    <Compile Remove="Pages\Utang\**" />
+    <Content Remove="Pages\Utang\**" />
+    <EmbeddedResource Remove="Pages\Utang\**" />
+    <None Remove="Pages\Utang\**" />
   </ItemGroup>
 
 
   <ItemGroup>
-    <Folder Include="Pages\Utang\" />
+    <PackageReference Include="MudBlazor" Version="8.*" />
+    <PackageReference Include="MudBlazor.ThemeManager" Version="3.0.0" />
   </ItemGroup>
 </Project>

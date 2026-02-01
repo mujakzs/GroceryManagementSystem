@@ -224,7 +224,6 @@
     // path relative to wwwroot
     private const string DefaultHeroImage = "images/default.jpg";
 
-    // If you later allow customizing the image, set CustomHeroImage; otherwise null uses default.
     private string? CustomHeroImage = null;
 
     private string HeroImage => string.IsNullOrWhiteSpace(CustomHeroImage) ? DefaultHeroImage : CustomHeroImage;
