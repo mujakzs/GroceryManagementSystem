@@ -1,7 +1,9 @@
 ﻿
+using GrocerySys.API.Security;
 using GrocerySys.Application.DTOs;
 using GrocerySys.Application.Services;
 using Microsoft.AspNetCore.Mvc;
+
 
 namespace GrocerySys.API.Controllers;
 
@@ -11,10 +13,12 @@ namespace GrocerySys.API.Controllers;
 public class AuthController : ControllerBase
 {
     private readonly AuthService _authService;
+    private readonly JwtTokenGenerator _jwtTokenGenerator;
 
-    public AuthController(AuthService authService)
+    public AuthController(AuthService authService, JwtTokenGenerator jwtTokengenerator)
     {
         _authService = authService;
+        _jwtTokenGenerator = jwtTokengenerator;
     }
 
     [HttpPost("register")]
@@ -27,10 +31,24 @@ public class AuthController : ControllerBase
     [HttpPost("login")]
     public async Task<IActionResult> Login(LoginRequestDto dto)
     {
-        var success = await _authService.LoginAsync(dto);
-        if (!success)
-            return Unauthorized("Invalid credentials.");
+        var user = await _authService.LoginAsync(dto);
 
-        return Ok("Login successful.");
+        if (user == null)
+        {
+            return Unauthorized("Invalid Credentials");
+        }
+
+        var token = _jwtTokenGenerator.GenerateToken(user);
+
+        return Ok(new
+        {
+            token,
+            user = new
+            {
+                user.UserId,
+                user.Username,
+                user.Role
+            }
+        });
     }
 }

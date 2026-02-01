@@ -1,8 +1,13 @@
+using GrocerySys.API.Security;
 using GrocerySys.Application.Interfaces;
 using GrocerySys.Application.Services;
 using GrocerySys.Infrastructure.Persistence;
 using GrocerySys.Infrastructure.Repositories;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -18,11 +23,42 @@ builder.Services.AddDbContext<GroceryDbContext>(options => options.UseSqlServer(
 
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<AuthService>();
+builder.Services.AddScoped<JwtTokenGenerator>();
+
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+var jwtSettings = builder.Configuration.GetSection("Jwt");
+
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+})
+.AddJwtBearer(options =>
+{
+    options.TokenValidationParameters = new TokenValidationParameters
+    {
+        ValidateIssuer = true,
+        ValidateAudience = true,
+        ValidateLifetime = true,
+        ValidateIssuerSigningKey = true,
+
+        ValidIssuer = jwtSettings["Issuer"],
+        ValidAudience = jwtSettings["Audience"],
+        IssuerSigningKey = new SymmetricSecurityKey(
+            Encoding.UTF8.GetBytes(jwtSettings["Key"])
+        )
+    };
+});
+
+
 var app = builder.Build();
+
+app.UseAuthentication();
+app.UseAuthorization();
+
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

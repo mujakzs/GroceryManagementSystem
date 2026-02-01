@@ -28,15 +28,20 @@ public class AuthService
         await _userRepository.AddAsync(user);
     }
 
-    public async Task<bool> LoginAsync(LoginRequestDto dto)
+    public async Task<User?> LoginAsync(LoginRequestDto dto)
     {
         var user = await _userRepository.GetByUsernameAsync(dto.Username);
         if (user == null || !user.IsActive)
         {
-            return false;
+            return null;
         }
         var passwordHash = HashPassword(dto.Password);
-        return user.PasswordHash == passwordHash;
+        if (passwordHash != user.PasswordHash)
+        {
+            return null;
+        }
+
+        return user;
     }
 
     private string HashPassword(string password)
