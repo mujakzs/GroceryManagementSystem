@@ -52,3 +52,13 @@ public class AuthController : ControllerBase
         });
     }
 }
+
+
+/*
+ * IACTION RESULT EXAMPLE
+ * return Ok();                 -> HTTP 200 OK
+ * return Ok(result);           -> HTTP 200 + JSON body
+ * return BadRequest();         -> HTTP 400
+ * return Unauthorized();       -> HTTP 401 
+ * return NotFound();           -> HTTP 404
+ */

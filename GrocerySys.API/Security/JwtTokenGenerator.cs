@@ -4,6 +4,8 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 
+
+//The main purpose of a token is to securely represent an authenticated user and maintain access across requests without resending credentials.
 namespace GrocerySys.API.Security;
 
 public class JwtTokenGenerator

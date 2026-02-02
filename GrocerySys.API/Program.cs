@@ -24,8 +24,6 @@ builder.Services.AddDbContext<GroceryDbContext>(options => options.UseSqlServer(
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<AuthService>();
 builder.Services.AddScoped<JwtTokenGenerator>();
-
-
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
@@ -52,6 +50,8 @@ builder.Services.AddAuthentication(options =>
         )
     };
 });
+
+//Jwt Authentication - Always add before Var app = builder.Build();
 
 
 var app = builder.Build();
