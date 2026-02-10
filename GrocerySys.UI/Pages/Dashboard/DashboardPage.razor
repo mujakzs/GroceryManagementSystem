@@ -1,5 +1,23 @@
-﻿<h3>DashboardPage</h3>
+﻿@page "/dashboard"
+@layout DashboardLayout
 
-@code {
+<MudText Typo="Typo.h5" Class="mb-4">Dashboard</MudText>
 
-}
+<MudGrid>
+    <MudItem xs="12" sm="6" md="3">
+        <MudPaper Class="pa-4">Total Sales Today</MudPaper>
+    </MudItem>
+    <MudItem xs="12" sm="6" md="3">
+        <MudPaper Class="pa-4">Inventory Value</MudPaper>
+    </MudItem>
+    <MudItem xs="12" sm="6" md="3">
+        <MudPaper Class="pa-4">Low Stock Items</MudPaper>
+    </MudItem>
+    <MudItem xs="12" sm="6" md="3">
+        <MudPaper Class="pa-4">Expiring Items</MudPaper>
+    </MudItem>
+</MudGrid>
+
+<MudPaper Class="pa-4 mt-6">
+    Charts will go here later
+</MudPaper>

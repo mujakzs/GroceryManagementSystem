@@ -1,10 +1,23 @@
 using GrocerySys.UI;
+using GrocerySys.UI.Services.Authentication;
 using MudBlazor.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add MudBlazor services
 builder.Services.AddMudServices();
+
+builder.Services.AddScoped<AuthApiService>();
+
+var apiBaseUrl = builder.Configuration["ApiBaseUrl"];
+
+if (string.IsNullOrWhiteSpace(apiBaseUrl))
+{
+    throw new Exception("ApiBaseUrl is not configured.");
+}
+
+builder.Services.AddScoped(sp =>new HttpClient{BaseAddress = new Uri(apiBaseUrl)});
+
 
 // Add services to the container.
 builder.Services.AddRazorComponents()

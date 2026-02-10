@@ -1,5 +1,69 @@
-﻿<h3>Register</h3>
+﻿@page "/register"
+@using GrocerySys.UI.Services.Authentication
+@inject AuthApiService AuthService
+@inject NavigationManager Nav
+
+<MudContainer MaxWidth="MaxWidth.Small" Class="mt-12">
+    <MudPaper Class="pa-6">
+
+        <MudText Typo="Typo.h5" Class="mb-4">Create Account</MudText>
+
+        <MudTextField @bind-Value="username"
+                      Label="Username"
+                      FullWidth />
+
+        <MudTextField @bind-Value="password"
+                      Label="Password"
+                      InputType="InputType.Password"
+                      FullWidth
+                      Class="mt-3" />
+
+        <MudSelect T="string"
+                   Label="Role"
+                   @bind-Value="role"
+                   FullWidth
+                   Class="mt-3">
+
+            <MudSelectItem Value="@("Admin")">Admin</MudSelectItem>
+            <MudSelectItem Value="@("Cashier")">Cashier</MudSelectItem>
+
+        </MudSelect>
+
+        <MudButton FullWidth
+                   Color="Color.Primary"
+                   Class="mt-4"
+                   OnClick="RegisterUser">
+            Register
+        </MudButton>
+
+        @if (!string.IsNullOrEmpty(error))
+        {
+            <MudAlert Severity="Severity.Error" Class="mt-3">
+                @error
+            </MudAlert>
+        }
+
+    </MudPaper>
+</MudContainer>
 
 @code {
+    private string username = string.Empty;
+    private string password = string.Empty;
+    private string role = "Admin";
+    private string? error;
 
+    private async Task RegisterUser()
+    {
+        error = null;
+
+        var success = await AuthService.RegisterAsync(username, password, role);
+
+        if (!success)
+        {
+            error = "Registration failed.";
+            return;
+        }
+
+        Nav.NavigateTo("/login");
+    }
 }

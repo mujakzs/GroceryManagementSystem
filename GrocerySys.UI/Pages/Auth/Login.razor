@@ -1,5 +1,64 @@
-﻿<h3>Login</h3>
+﻿@page "/login"
+@using GrocerySys.UI.Services.Authentication
+@inject AuthApiService AuthService
+@inject NavigationManager Nav
+@inject IJSRuntime JS
+
+<MudContainer MaxWidth="MaxWidth.Small" Class="mt-12">
+    <MudPaper Class="pa-6">
+
+        <MudText Typo="Typo.h5" Class="mb-4">Login</MudText>
+
+        <MudTextField @bind-Value="username"
+                      Label="Username"
+                      Required="true"
+                      FullWidth="true" />
+
+        <MudTextField @bind-Value="password"
+                      Label="Password"
+                      InputType="InputType.Password"
+                      Required="true"
+                      FullWidth="true"
+                      Class="mt-3" />
+
+        <MudButton Color="Color.Primary"
+                   Variant="Variant.Filled"
+                   FullWidth="true"
+                   Class="mt-4"
+                   OnClick="LoginUser">
+            Login
+        </MudButton>
+
+        @if (!string.IsNullOrEmpty(error))
+        {
+            <MudAlert Severity="Severity.Error" Class="mt-3">
+                @error
+            </MudAlert>
+        }
+
+    </MudPaper>
+</MudContainer>
 
 @code {
+    private string username = "";
+    private string password = "";
+    private string? error;
 
+    private async Task LoginUser()
+    {
+        error = null;
+
+        var token = await AuthService.LoginAsync(username, password);
+
+        if (token == null)
+        {
+            error = "Invalid username or password.";
+            return;
+        }
+
+        // Store JWT
+        await JS.InvokeVoidAsync("localStorage.setItem", "authToken", token);
+
+        Nav.NavigateTo("/dashboard", true);
+    }
 }
