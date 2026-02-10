@@ -12,4 +12,21 @@ public class GroceryDbContext : DbContext
     }
 
     public DbSet<User> Users => Set<User>();
+    public DbSet<Product> Products => Set<Product>();
 }
+
+
+/*
+ *  Final Rule to Remember (Very Important)
+   -> DbContext knows about Domain Entities
+   -> Domain Entities do NOT know about DbContext
+
+SOLID PRINCIPLE APPLIED
+
+| Principle             | How                                      |
+| --------------------- | ---------------------------------------- |
+| Single Responsibility | DbContext only maps entities             |
+| Open/Closed           | You can add DbSets without breaking code |
+| Dependency Inversion  | Higher layers don’t know EF exists       |
+
+*/

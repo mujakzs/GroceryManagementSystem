@@ -1,4 +1,4 @@
-using GrocerySys.API.Security;
+﻿using GrocerySys.API.Security;
 using GrocerySys.Application.Interfaces;
 using GrocerySys.Application.Services;
 using GrocerySys.Infrastructure.Persistence;
@@ -8,59 +8,64 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 
-
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-
+// =======================
+// Core framework services
+// =======================
 builder.Services.AddControllers();
-// Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
-builder.Services.AddOpenApi();
-
-builder.Services.AddDbContext<GroceryDbContext>(options => options.UseSqlServer(
-        builder.Configuration.GetConnectionString("DefaultConnection")
-    ));
-
-builder.Services.AddScoped<IUserRepository, UserRepository>();
-builder.Services.AddScoped<AuthService>();
-builder.Services.AddScoped<JwtTokenGenerator>();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+// =======================
+// Database (Infrastructure)
+// =======================
+builder.Services.AddDbContext<GroceryDbContext>(options =>
+    options.UseSqlServer(
+        builder.Configuration.GetConnectionString("DefaultConnection")
+    ));
+
+// =======================
+// Repositories
+// =======================
+builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<IProductRepository, ProductRepository>();
+
+// =======================
+// Application Services
+// =======================
+builder.Services.AddScoped<AuthService>();
+builder.Services.AddScoped<ProductService>();
+builder.Services.AddScoped<JwtTokenGenerator>();
+
+// =======================
+// JWT Authentication
+// =======================
 var jwtSettings = builder.Configuration.GetSection("Jwt");
 
-builder.Services.AddAuthentication(options =>
-{
-    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-})
-.AddJwtBearer(options =>
-{
-    options.TokenValidationParameters = new TokenValidationParameters
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddJwtBearer(options =>
     {
-        ValidateIssuer = true,
-        ValidateAudience = true,
-        ValidateLifetime = true,
-        ValidateIssuerSigningKey = true,
+        options.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidateIssuer = true,
+            ValidateAudience = true,
+            ValidateLifetime = true,
+            ValidateIssuerSigningKey = true,
 
-        ValidIssuer = jwtSettings["Issuer"],
-        ValidAudience = jwtSettings["Audience"],
-        IssuerSigningKey = new SymmetricSecurityKey(
-            Encoding.UTF8.GetBytes(jwtSettings["Key"])
-        )
-    };
-});
-
-//Jwt Authentication - Always add before Var app = builder.Build();
-
+            ValidIssuer = jwtSettings["Issuer"],
+            ValidAudience = jwtSettings["Audience"],
+            IssuerSigningKey = new SymmetricSecurityKey(
+                Encoding.UTF8.GetBytes(jwtSettings["Key"]!)
+            )
+        };
+    });
 
 var app = builder.Build();
 
-app.UseAuthentication();
-app.UseAuthorization();
-
-
-// Configure the HTTP request pipeline.
+// =======================
+// Middleware pipeline
+// =======================
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
@@ -68,9 +73,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
-
 app.Run();

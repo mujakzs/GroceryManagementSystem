@@ -1,5 +1,4 @@
 ﻿@page "/"
-@page "/Home"
 @inject NavigationManager NavigationManager
 
 @* Hero Section  *@
@@ -27,7 +26,7 @@
                                Size="Size.Large"
                                Class="mt-4 px-8"
                                Style="width: fit-content; text-transform: none; border-radius: 8px;"
-                               OnClick="@(() => NavigationManager.NavigateTo("/signup"))">
+                               OnClick="@(() => NavigationManager.NavigateTo("/register"))">
                         Start Free Trial
                     </MudButton>
 
@@ -209,7 +208,7 @@
                                   Style="border-radius: 8px;" />
                     <MudButton Variant="Variant.Filled" Color="Color.Tertiary" Size="Size.Large"
                                Style="text-transform: none; border-radius: 8px;"
-                               OnClick="@(() => NavigationManager.NavigateTo("/signup"))">
+                               OnClick="@(() => NavigationManager.NavigateTo("/register"))">
                         Sign Up Now
                     </MudButton>
                 </MudStack>
