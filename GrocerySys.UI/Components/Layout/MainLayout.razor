@@ -36,11 +36,12 @@
             <MudDivider Vertical="true" FlexItem="true" Class="mx-2" />
 
             <MudButton Variant="Variant.Filled" Color="Color.Primary" Href="/login" Class="ml-2">
-                Login
+                Login / signup
             </MudButton>
         </MudHidden>
     </MudAppBar>
 
+    @* Mobile Responsive *@
     <MudDrawer @bind-Open="_drawerOpen"
                ClipMode="DrawerClipMode.Never"
                Anchor="Anchor.Left"
@@ -57,11 +58,12 @@
             <MudNavLink Icon="@Icons.Material.Filled.Phone" Href="/contact">Contact</MudNavLink>
 
             <MudDivider Class="my-2" />
-            <MudNavLink Icon="@Icons.Material.Filled.Login" Href="/login">Login</MudNavLink>
+            <MudNavLink Icon="@Icons.Material.Filled.Login" Href="/login">Login / signup</MudNavLink>
 
         </MudNavMenu>
     </MudDrawer>
 
+    @* landing/Index.razaor *@
     <MudMainContent Class="p-0">
         @Body
     </MudMainContent>

@@ -28,6 +28,13 @@
                    OnClick="LoginUser">
             Login
         </MudButton>
+        <MudButton Color="Color.Secondary" 
+            Variant="Variant.Filled" 
+            FullWidth="true" 
+            Class="mt-4" 
+            OnClick="@(() => Nav.NavigateTo("/register"))">
+            Register new account
+        </MudButton>
 
         @if (!string.IsNullOrEmpty(error))
         {

@@ -36,3 +36,9 @@ public class AuthApiService
     }
 }
 
+// summary
+/*
+ * This service class, AuthApiService, provides methods to interact with the authentication API endpoints for user registration and login. 
+ * It uses HttpClient to send POST requests to the API and handles the responses accordingly. 
+ * The RegisterAsync method returns a boolean indicating success, while the LoginAsync method returns a JWT token if the login is successful or null if it fails.
+ */
