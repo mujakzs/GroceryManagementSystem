@@ -1,4 +1,5 @@
 ﻿@page "/register"
+@using GrocerySys.UI.Models.Request
 @using GrocerySys.UI.Services.Authentication
 @inject AuthApiService AuthService
 @inject NavigationManager Nav
@@ -58,7 +59,14 @@
     {
         error = null;
 
-        var success = await AuthService.RegisterAsync(username, password, role);
+        var request = new RegisterRequest
+        {
+            Username = username,
+            Password = password,
+            Role = role
+        };
+
+        var success = await AuthService.RegisterAsync(request);
 
         if (!success)
         {

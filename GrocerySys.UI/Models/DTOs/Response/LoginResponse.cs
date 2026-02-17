@@ -1,4 +1,4 @@
-﻿namespace GrocerySys.UI.Models.Response;
+﻿namespace GrocerySys.UI.Models.DTOs.Response;
 
 public class LoginResponse
 {

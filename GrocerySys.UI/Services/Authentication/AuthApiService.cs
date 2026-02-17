@@ -1,7 +1,6 @@
-﻿using GrocerySys.UI.Models.Response;
+﻿using GrocerySys.UI.Models.DTOs.Response;
+using GrocerySys.UI.Models.Request;
 using System.Net.Http.Json;
-
-
 
 namespace GrocerySys.UI.Services.Authentication;
 
@@ -14,31 +13,21 @@ public class AuthApiService
         _http = http;
     }
 
-    public async Task<bool> RegisterAsync(string username, string password, string role)
+    public async Task<bool> RegisterAsync(RegisterRequest request)
     {
-        var response = await _http.PostAsJsonAsync(
-            "/api/auth/register", new { username, password, role });
+        var response = await _http.PostAsJsonAsync("api/auth/register", request);
 
         return response.IsSuccessStatusCode;
     }
 
-    public async Task<string?> LoginAsync(string username, string password)
+    public async Task<string?> LoginAsync(LoginRequest request)
     {
-        var response = await _http.PostAsJsonAsync(
-            "api/auth/login", new { username, password });
+        var response = await _http.PostAsJsonAsync("api/auth/login", request);
+
         if (!response.IsSuccessStatusCode)
-        {
             return null;
-        }
 
         var result = await response.Content.ReadFromJsonAsync<LoginResponse>();
         return result?.Token;
     }
 }
-
-// summary
-/*
- * This service class, AuthApiService, provides methods to interact with the authentication API endpoints for user registration and login. 
- * It uses HttpClient to send POST requests to the API and handles the responses accordingly. 
- * The RegisterAsync method returns a boolean indicating success, while the LoginAsync method returns a JWT token if the login is successful or null if it fails.
- */

@@ -7,8 +7,9 @@ var builder = WebApplication.CreateBuilder(args);
 // Add MudBlazor services
 builder.Services.AddMudServices();
 
-builder.Services.AddScoped<AuthApiService>();
-
+// =============================
+// API Base URL
+// =============================
 var apiBaseUrl = builder.Configuration["ApiBaseUrl"];
 
 if (string.IsNullOrWhiteSpace(apiBaseUrl))
@@ -16,26 +17,39 @@ if (string.IsNullOrWhiteSpace(apiBaseUrl))
     throw new Exception("ApiBaseUrl is not configured.");
 }
 
-builder.Services.AddScoped(sp =>new HttpClient{BaseAddress = new Uri(apiBaseUrl)});
+// =============================
+// JWT Handler
+// =============================
+builder.Services.AddScoped<JwtAuthorizationMessageHandler>();
+builder.Services.AddScoped<TokenProvider>();
 
+// =============================
+// HttpClient with JWT pipeline
+// =============================
+builder.Services.AddHttpClient<AuthApiService>(client =>
+{
+    client.BaseAddress = new Uri(apiBaseUrl);
+})
+.AddHttpMessageHandler<JwtAuthorizationMessageHandler>();
 
-// Add services to the container.
+// =============================
+// Razor Components
+// =============================
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
+// =============================
+// Middleware
+// =============================
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Error", createScopeForErrors: true);
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
 
 app.UseHttpsRedirection();
-
-
 app.UseAntiforgery();
 
 app.MapStaticAssets();

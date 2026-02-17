@@ -1,7 +1,9 @@
 ﻿@page "/login"
+@using GrocerySys.UI.Models.Request
 @using GrocerySys.UI.Services.Authentication
 @inject AuthApiService AuthService
 @inject NavigationManager Nav
+@inject TokenProvider TokenProvider
 @inject IJSRuntime JS
 
 <MudContainer MaxWidth="MaxWidth.Small" Class="mt-12">
@@ -55,7 +57,13 @@
     {
         error = null;
 
-        var token = await AuthService.LoginAsync(username, password);
+        var request = new LoginRequest
+        {
+            Username = username,
+            Password = password
+        };
+
+        var token = await AuthService.LoginAsync(request);
 
         if (token == null)
         {
@@ -63,8 +71,9 @@
             return;
         }
 
-        // Store JWT
+        TokenProvider.Token = token;
         await JS.InvokeVoidAsync("localStorage.setItem", "authToken", token);
+
 
         Nav.NavigateTo("/dashboard", true);
     }
