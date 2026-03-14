@@ -27,3 +27,20 @@ public class JwtAuthorizationMessageHandler : DelegatingHandler
         return base.SendAsync(request, cancellationToken);
     }
 }
+
+
+/*
+ 
+Blazor Server architecture:
+
+Browser
+   ↓
+Blazor Circuit
+   ↓
+Scoped services(TokenProvider)
+   ↓
+HttpMessageHandler
+   ↓
+API
+
+*/

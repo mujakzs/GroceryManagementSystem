@@ -22,6 +22,7 @@ if (string.IsNullOrWhiteSpace(apiBaseUrl))
 // =============================
 builder.Services.AddScoped<JwtAuthorizationMessageHandler>();
 builder.Services.AddScoped<TokenProvider>();
+builder.Services.AddScoped<AuthStateService>();
 
 // =============================
 // HttpClient with JWT pipeline

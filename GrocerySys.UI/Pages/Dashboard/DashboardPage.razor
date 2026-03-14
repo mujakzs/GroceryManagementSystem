@@ -1,5 +1,10 @@
 ﻿@page "/dashboard"
+@using GrocerySys.UI.Services.Authentication
 @layout DashboardLayout
+@inject AuthStateService AuthState
+@inject IJSRuntime JS
+@inject NavigationManager Nav
+@inject TokenProvider TokenProvider
 
 <MudText Typo="Typo.h5" Class="mb-4">Dashboard</MudText>
 
@@ -21,3 +26,24 @@
 <MudPaper Class="pa-4 mt-6">
     Charts will go here later
 </MudPaper>
+
+
+@* @code{
+    protected override async Task OnInitializedAsync()
+    {
+        // Try restore token from localStorage
+        var storedToken = await JS.InvokeAsync<string>(
+            "localStorage.getItem",
+            "authToken");
+
+        if (!string.IsNullOrWhiteSpace(storedToken))
+        {
+            TokenProvider.Token = storedToken;
+        }
+
+        if (!AuthState.IsAuthenticated)
+        {
+            Nav.NavigateTo("/login", true);
+        }
+    }
+} *@
